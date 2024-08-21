@@ -13,7 +13,13 @@ module.exports={
             return await models.User.findOne({username});
         },
         me:async (parent,args,{models,user})=>{
-            return models.User.findById(user.id);
+            return await models.User.findById(user.id);
+        },
+        friends:async (parent,args,{models,user})=>{
+            const me=await models.User.findById(user.id);
+            return await me.friends.map(async (id)=>{
+                return await models.User.findById(id);
+            });
         },
         noteFeed:async (parent,{cursor},{models})=>{
             const limit=10;

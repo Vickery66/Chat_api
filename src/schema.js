@@ -8,6 +8,7 @@ module.exports=gql`
         users:[User!]!
         user(username:String):User!
         me:User!
+        friends:[User]!
         noteFeed(cursor:String):NoteFeed
     }
     type Note{
